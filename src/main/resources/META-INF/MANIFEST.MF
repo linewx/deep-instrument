@@ -1,5 +1,5 @@
-Agent-Class: com.linewx.deep.instrumentation.agent.MyInstrumentationAgent
+Agent-Class: com.linewx.deep.instrumentation.agent.DeepInstrumentationAgent
 Can-Redefine-Classes: true
 Can-Retransform-Classes: true
-Premain-Class: com.linewx.deep.instrumentation.agent.MyInstrumentationAgent
+Premain-Class: com.linewx.deep.instrumentation.agent.DeepInstrumentationAgent
 Main-Class: com.linewx.deep.instrumentation.application.AgentLoader

@@ -9,9 +9,9 @@ import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
 
-public class AtmTransformer implements ClassFileTransformer {
+public class DeepTransformer implements ClassFileTransformer {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(AtmTransformer.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(DeepTransformer.class);
 
     /**
      * The internal form class name of the class to transform
@@ -24,13 +24,8 @@ public class AtmTransformer implements ClassFileTransformer {
 
     private String logName;
 
-    public AtmTransformer(String targetClassName, ClassLoader targetClassLoader) {
-        this.targetClassName = targetClassName;
-        this.targetClassLoader = targetClassLoader;
-        this.logName = "LOGGER";
-    }
 
-    public AtmTransformer(String targetClassName, ClassLoader targetClassLoader, String logName) {
+    public DeepTransformer(String targetClassName, ClassLoader targetClassLoader, String logName) {
         this.targetClassName = targetClassName;
         this.targetClassLoader = targetClassLoader;
         this.logName = logName;

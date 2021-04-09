@@ -6,18 +6,19 @@ import org.slf4j.LoggerFactory;
 import java.lang.instrument.Instrumentation;
 import java.lang.reflect.Field;
 
-public class MyInstrumentationAgent {
-    private static Logger LOGGER = LoggerFactory.getLogger(MyInstrumentationAgent.class);
+public class DeepInstrumentationAgent {
+    private static Logger LOGGER = LoggerFactory.getLogger(DeepInstrumentationAgent.class);
 
     public static void premain(String agentArgs, Instrumentation inst) {
-        LOGGER.info("[Agent] In premain methods1111");
+        LOGGER.info("[Deep Agent] In premain");
 
         String className = "com.hp.maas.platform.ems.impl.EntityManagementServiceImpl";
         transformClass(className,inst);
     }
 
     public static void agentmain(String agentArgs, Instrumentation inst) {
-        LOGGER.info("[Agent] In agentmain method22222");
+        LOGGER.info("[Deep Agent] In agentmain");
+        LOGGER.info("[Deep Agent] In agentmain");
 
         String className = "com.hp.maas.platform.ems.impl.EntityManagementServiceImpl";
         transformClass(className,inst);
@@ -26,22 +27,7 @@ public class MyInstrumentationAgent {
     private static void transformClass(String className, Instrumentation instrumentation) {
         Class<?> targetCls = null;
         ClassLoader targetClassLoader = null;
-//        // see if we can get the class using forName
-//        try {
-//            for (Class<?> type : instrumentation.getAllLoadedClasses()) {
-//                if (className.equals(type.getName())) {
-//                    targetCls = type;
-//                    break;
-//                }
-//            }
-////            targetCls = Class.forName(className);
-//            targetClassLoader = targetCls.getClassLoader();
-//            transform(targetCls, targetClassLoader, instrumentation);
-//            return;
-//        } catch (Exception ex) {
-//            LOGGER.error("Class [{}] not found with Class.forName");
-//        }
-        // otherwise iterate all loaded classes and find what we want
+
         for(Class<?> clazz: instrumentation.getAllLoadedClasses()) {
 
             if(clazz.getName().startsWith("com.hp.maas.platform")) {
@@ -81,7 +67,7 @@ public class MyInstrumentationAgent {
     }
 
     private static void transform(Class<?> clazz, ClassLoader classLoader, Instrumentation instrumentation, String logName) {
-        AtmTransformer dt = new AtmTransformer(clazz.getName(), classLoader, logName);
+        DeepTransformer dt = new DeepTransformer(clazz.getName(), classLoader, logName);
         instrumentation.addTransformer(dt, true);
         try {
             instrumentation.retransformClasses(clazz);
